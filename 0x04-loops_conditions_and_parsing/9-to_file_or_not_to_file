@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 #gives you information about the school file.
 
-if [ -e "school" ];
-	then
+if [ -e "school" ]; then
+	printf "school file is not empty\n"
+	if [ -s "school" ]; then
 		printf "school file is not empty\n"
-		if [ -s "school" ];
-			then
-				printf "school file is not empty\n"
-		else
-			printf "school file is empty\n"
-		fi
-		if [ -f "school" ];
-			then
-				printf "school is a regular file\n"
-		fi
+	else
+		printf "school file is empty\n"
+	fi
+	if [ -f "school" ]; then
+		printf "school is a regular file\n"
+	fi
 else
 	printf "school file does not exist\n"
 fi
