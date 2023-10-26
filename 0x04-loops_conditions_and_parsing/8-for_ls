@@ -7,6 +7,6 @@ for file in *
 do
 	if [[ $file != .* ]] && [[ $file == *-* ]];
 	then
-	echo "$file" | cut -d '-' -f 2-
+	echo "$file" | cut -d '-' -f2
 	fi
 done
