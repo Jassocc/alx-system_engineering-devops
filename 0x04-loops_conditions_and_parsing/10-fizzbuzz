@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#Write a Bash script that displays numbers from 1 to 100.
+for ((num=1; num<=100; num++));
+do
+	if ((num % 3 == 0)) && ((num % 5 == 0))
+	then
+		printf "FizzBuzz\n"
+	elif ((num % 3 == 0))
+	then
+		printf "Fizz\n"
+	elif ((num % 5 == 0))
+	then
+		printf "Buzz\n"
+	else
+		echo "$num"
+	fi
+done
