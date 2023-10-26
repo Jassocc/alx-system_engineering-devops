@@ -4,7 +4,7 @@
 #In a list format
 #Where only the part of the name after the first dash is displayed
 f="$(ls)"
-for file in f
+for file in $f
 do
 	echo "$file" | cut -d '-' -f2
 done
