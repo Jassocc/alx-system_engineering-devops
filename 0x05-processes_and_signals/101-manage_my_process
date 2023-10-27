@@ -2,7 +2,6 @@
 #manages manage_my_process
 if [ $# -eq 0 ]; then
 	echo "Usage: manage_my_process {start|stop|restart}"
-	exit 1
 fi
 case "$1" in
 	start)
