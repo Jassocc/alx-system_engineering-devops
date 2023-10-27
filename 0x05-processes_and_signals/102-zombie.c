@@ -35,6 +35,5 @@ int main(void)
 			printf("Zombie process created, PID: %d\n", ch);
 		}
 	}
-	infinite_while();
-	return (0);
+	return (infinite_while());
 }
