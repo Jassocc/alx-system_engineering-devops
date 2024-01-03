@@ -1,41 +1,21 @@
 #nginx with puppet
-package { 'nginx':
-  ensure => installed,
+exec { 'apt-get-update':
+  command => '/usr/bin/apt-get update',
 }
-file { '/usr/share/nginx/html/index.html':
+package { 'nginx':
+  ensure  => installed,
+  require => Exec['apt-get-update']
+}
+file { '/var/www/html/index.html':
   ensure  => present,
   content => 'Hello World!',
   require => Package['nginx'],
 }
-file { '/etc/nginx/sites-available/default':
-  ensure  => present,
-  content => @(EOT)
-	server {
-		listen 80 default_server;
-		listen [::]:80 default_server;
-
-		root /usr/share/nginx/html;
-		index index.html;
-
-		location /redirect_me {
-			return 301 https://youtube.com;
-		}
-
-		location / {
-			return 200 "Hello World!";
-		}
-  }
-  EOT
-  require => Package['nginx'],
-  notify  => Service['nginx'],
-}
-file { '/etc/nginx/sites-enabled/default':
-  ensure  => link,
-  target  => '/etc/nginx/sites-available/default',
-  require => File['/etc/nginx/sites-available/default'],
+exec {'redirect_me':
+  command  => 'sed -i "24i\	rewrite ^redirect_me https://www.youtube.com permanent;" /etc/nginx/sites-available/default',
+  provider => 'shell',
 }
 service { 'nginx':
   ensure  => running,
-  enable  => true,
   require => Package['nginx'],
 }
