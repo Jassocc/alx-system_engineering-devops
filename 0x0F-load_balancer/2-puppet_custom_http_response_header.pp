@@ -17,13 +17,13 @@ file { '/etc/nginx/sites-enabled/default':
 	index index.html;
 	add_header X-Served-By $HOSTNAME;
 	location /redirect_me {
-	  return 301 https://www.youtube.com;
+		return 301 https://www.youtube.com;
 	}
 	error_page 404 /custom_404.html;
 	location = /custom_404.html {
-	  internal;
+		internal;
 	}
-      }',
+}',
   notify  => Service['nginx'],
 }
 service { 'nginx':
