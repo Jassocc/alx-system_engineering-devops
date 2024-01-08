@@ -2,7 +2,7 @@
 exec {'update':
   provider => shell,
   command  => 'sudo apt-get -y update',
-  before   => Exec['install Nginx'],
+  before   => Exec['Nginx'],
 }
 exec {'Nginx':
   provider => shell,
