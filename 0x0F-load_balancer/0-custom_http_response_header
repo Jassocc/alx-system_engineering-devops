@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#custom 404 page that contains the string Ceci n'est pas une page.
+apt-get -y update
+apt-get -y install nginx
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+echo "server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /usr/share/nginx/html;
+	index index.html;
+	location /redirect_me {
+		return 301 https://www.youtube.com;
+	}
+	error_page 404 /custom_404.html;
+	location = /custom_404.html{
+		internal;
+	}
+	add_header X-Served-By $HOSTNAME;
+}" | sudo tee -a /etc/nginx/sites-enabled/default
+sudo service nginx start
