@@ -10,8 +10,7 @@ exec {'Nginx':
 }
 file { '/etc/nginx/sites-enabled/default':
   ensure  => 'file',
-  content => '
-    server {
+  content => 'server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 	root /usr/share/nginx/html;
@@ -24,8 +23,7 @@ file { '/etc/nginx/sites-enabled/default':
 	location = /custom_404.html {
 	  internal;
 	}
-      }
-  ',
+      }',
   notify  => Service['nginx'],
 }
 service { 'nginx':
