@@ -18,5 +18,5 @@ echo "server {
 		internal;
 	}
 	add_header X-Served-By $HOSTNAME;
-}" | sudo tee -a /etc/nginx/sites-enabled/default
+}" > /etc/nginx/sites-enabled/default
 sudo service nginx start
