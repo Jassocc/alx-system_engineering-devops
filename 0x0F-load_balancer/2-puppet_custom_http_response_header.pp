@@ -15,7 +15,7 @@ file { '/etc/nginx/sites-enabled/default':
 	listen [::]:80 default_server;
 	root /usr/share/nginx/html;
 	index index.html;
-	add_header X-Served-By $hostname;
+	add_header X-Served-By $HOSTNAME;
 	location /redirect_me {
 	  return 301 https://www.youtube.com;
 	}
@@ -30,4 +30,8 @@ service { 'nginx':
   ensure    => 'running',
   enable    => true,
   subscribe => File['/etc/nginx/sites-enabled/default'],
+}
+exec { 'restart':
+  provider => shell,
+  command  => 'sudo service nginx restart',
 }
