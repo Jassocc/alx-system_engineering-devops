@@ -2,6 +2,7 @@
 #custom 404 page that contains the string Ceci n'est pas une page.
 apt-get -y update
 apt-get -y install nginx
+sudo service nginx start
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
 echo "server {
@@ -10,8 +11,7 @@ echo "server {
 
 	root /usr/share/nginx/html;
 	index index.html;
-	server_name _;
-	add_header X-Served_by $HOSTNAME;
+	add_header X-Served-By $HOSTNAME;
 	location /redirect_me {
 		return 301 https://www.youtube.com;
 	}
