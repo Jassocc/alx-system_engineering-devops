@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #Using what you did for task #0, make your fix short and sweet.
-sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
 kill "$(pgrep 'nginx' | head -l)"
