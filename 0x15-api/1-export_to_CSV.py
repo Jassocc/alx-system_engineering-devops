@@ -19,14 +19,13 @@ def export_to_csv(employee_id):
         user_data = user_response.json()
         todos_response = requests.get(todos_url)
         todos_data = todos_response.json()
-        employee_name = user_data['name']
+        employee_name = user_data['username']
         with open('{}.csv'.format(employee_id), mode='w',
                   newline='') as csv_file:
             fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS',
                           'TASK_TITLE']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames,
                                     quoting=csv.QUOTE_ALL)
-            writer.writeheader()
             for task in todos_data:
                 writer.writerow({
                     'USER_ID': str(employee_id),
