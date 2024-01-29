@@ -2,8 +2,8 @@
 """
 using this REST API, for a given employee ID
 """
-import sys
 import requests
+import sys
 
 
 def employee_todo_list(employee_id):
