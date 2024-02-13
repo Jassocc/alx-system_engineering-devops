@@ -10,13 +10,12 @@ def number_of_subscribers(subreddit):
     """
     returns number of subscribers
     """
-    url = "https://www.reddit.com/subreddits/search.json?q={}".format(subreddit)
-    headers = {"User-Agent": "MyRedditClient/1.0"}
-    try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        response.raise_for_status()
-        data = response.json().get('data')
-        subscribers = data.get('subscribers')
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {"User-Agent": "MyBot/1.0"}
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    if response.status_code == 200:
+        data = response.json()
+        subscribers = data["data"]["subscribers"]
         return subscribers
-    except requests.exceptions.RequestException as e:
+    else:
         return 0
