@@ -13,8 +13,6 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {"User-Agent": "MyBot/1.0"}
     response = requests.get(url, headers=headers, allow_redirects=False)
-    print("Response status code:", response.status_code)
-    print("Response content:", response.content)
     if response.status_code == 200:
         data = response.json()
         subscribers = data["data"]["subscribers"]
